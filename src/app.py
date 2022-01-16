@@ -15,6 +15,7 @@ def get_subcounts(subreddits):
     subcounts = []
     sub = {}
 
+    # get the name and subscriber count of each subreddit   
     for subreddit in subreddits:
         sub = {
             "sub_name": subreddit.display_name.capitalize(),
