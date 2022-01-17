@@ -32,5 +32,24 @@ def get_subcounts(subreddits):
     return subcounts
 
 
+def save_subcounts(subcounts):
+    sql_add_subcount = "INSERT INTO subcount (day, subreddit_id, subscribers) VALUES (%s, %s, %s)"
+    
+    db_subreddits = load_subreddits(conn)
+    
+    day = datetime.date.today()
+    
+    for subcount in subcounts:
+        for db_subreddit in db_subreddits:
+
+            if db_subreddit["subreddit_name"] == subcount["sub_name"]:
+                subreddit_id = db_subreddit["subreddit_id"]
+
+        update(conn, sql_add_subcount, (day, subreddit_id, subcount["sub_count"]))
+
+    print("Saved subcounts.")
+
+
 subreddits = get_subreddits(reddit)
 subcounts = get_subcounts(subreddits)
+save_subcounts(subcounts)
