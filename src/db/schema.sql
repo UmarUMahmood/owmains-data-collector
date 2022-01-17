@@ -12,3 +12,38 @@ CREATE TABLE subcount (
     PRIMARY KEY (id),
     FOREIGN KEY (subreddit_id) REFERENCES subreddit(subreddit_id)
 );
+
+INSERT INTO subreddit (subreddit_name)
+VALUES 
+    ('Anamains'),
+    ('Asheowmains'),
+    ('Baptistemains'),
+    ('Bastionmains'),
+    ('Brigittemains'),
+    ('Doomfistmains'),
+    ('Dvamains'),
+    ('Echomains'),
+    ('Genjimains'),
+    ('Hanzomain'),
+    ('Junkratmains'),
+    ('Luciomains'),
+    ('Mccreemains'),
+    ('Meimains'),
+    ('Mercymains'),
+    ('Moiramains'),
+    ('Orisamains'),
+    ('Pharahmains'),
+    ('Reapermain'),
+    ('Reinhardtmains'),
+    ('Roadhogmains'),
+    ('Sigmamains'),
+    ('Soldier76mains'),
+    ('Sombramains'),
+    ('Symmetramains'),
+    ('Torbjornmains'),
+    ('Tracermains'),
+    ('Widowmakermains'),
+    ('Winstonmains'),
+    ('Wreckingballmains'),
+    ('Zaryamains'),
+    ('Zenyattamains');

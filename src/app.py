@@ -34,5 +34,3 @@ def get_subcounts(subreddits):
 
 subreddits = get_subreddits(reddit)
 subcounts = get_subcounts(subreddits)
-
-print(subreddits)
