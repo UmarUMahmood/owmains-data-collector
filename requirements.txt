@@ -1,2 +1,5 @@
+black
 praw
 python-dotenv
+pymysql
+pylint
