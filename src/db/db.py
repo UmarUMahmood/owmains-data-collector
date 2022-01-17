@@ -6,7 +6,7 @@ dotenv.load_dotenv()
 
 HOST = os.environ.get("MYSQL_HOST")
 PORT = os.environ.get("MYSQL_PORT")
-SQL_USER = os.environ.get("MYSQL_USER")
+SQL_USER = os.environ.get("MYSQL_USERNAME")
 SQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
 DB = os.environ.get("MYSQL_DB")
 

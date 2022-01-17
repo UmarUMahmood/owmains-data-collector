@@ -1,6 +1,9 @@
-import os, auth
+import os, auth, datetime
+from db.db import connection, query, fetch, update, load_subreddits
 
 reddit = auth.request()
+conn = connection()
+
 os.system("clear")
 
 
@@ -15,7 +18,7 @@ def get_subcounts(subreddits):
     subcounts = []
     sub = {}
 
-    # get the name and subscriber count of each subreddit   
+    # get the name and subscriber count of each subreddit
     for subreddit in subreddits:
         sub = {
             "sub_name": subreddit.display_name.capitalize(),
@@ -32,5 +35,4 @@ def get_subcounts(subreddits):
 subreddits = get_subreddits(reddit)
 subcounts = get_subcounts(subreddits)
 
-for subcount in subcounts:
-    print(subcount)
+print(subreddits)
