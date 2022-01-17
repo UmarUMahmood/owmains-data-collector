@@ -7,7 +7,7 @@ CREATE TABLE subreddit (
 CREATE TABLE subcount (
     id int NOT NULL AUTO_INCREMENT,
     day date NOT NULL,
-    subreddit_id int NOT NULL
+    subreddit_id int NOT NULL,
     subscribers int NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (subreddit_id) REFERENCES subreddit(subreddit_id)
