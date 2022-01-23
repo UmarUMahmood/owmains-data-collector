@@ -1,6 +1,6 @@
 CREATE TABLE subreddit (
     subreddit_id int NOT NULL AUTO_INCREMENT,
-    subreddit_name varchar(255) NOT NULL,
+    subreddit_name varchar(255) NOT NULL UNIQUE,
     PRIMARY KEY (subreddit_id)
 );
 
