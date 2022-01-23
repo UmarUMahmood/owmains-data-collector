@@ -13,6 +13,37 @@ def get_subreddits(reddit):
     return subreddits
 
 
+def find_new_subreddits(subreddits):
+
+    # get the subreddits from db
+    db_subreddits = load_subreddits(conn)
+
+    # only need the subreddit names
+    db_subs = []
+    for db_subreddit in db_subreddits:
+        db_subs.append(db_subreddit["subreddit_name"])
+
+    # get subreddit names from the multireddit
+    subs = []
+    for subreddit in subreddits:
+        sub = subreddit.display_name.capitalize()
+        subs.append(sub)
+
+    # compare both subreddit names
+    s = set(db_subs)
+    new_subreddits = [x for x in subs if x not in s]
+
+    return new_subreddits
+
+
+def save_subreddits_to_db(new_subreddits):
+    sql_add_subreddit = "INSERT INTO subreddit (subreddit_name) VALUES (%s)"
+
+    for new_subreddit in new_subreddits:
+        update(conn, sql_add_subreddit, new_subreddit)
+        print(f"Added {new_subreddit} to db.")
+
+
 def get_subcounts(subreddits):
 
     subcounts = []
@@ -33,12 +64,14 @@ def get_subcounts(subreddits):
 
 
 def save_subcounts(subcounts):
-    sql_add_subcount = "INSERT INTO subcount (day, subreddit_id, subscribers) VALUES (%s, %s, %s)"
-    
+    sql_add_subcount = (
+        "INSERT INTO subcount (day, subreddit_id, subscribers) VALUES (%s, %s, %s)"
+    )
+
     db_subreddits = load_subreddits(conn)
-    
+
     day = datetime.date.today()
-    
+
     for subcount in subcounts:
         for db_subreddit in db_subreddits:
 
@@ -47,9 +80,23 @@ def save_subcounts(subcounts):
 
         update(conn, sql_add_subcount, (day, subreddit_id, subcount["sub_count"]))
 
-    print("Saved subcounts.")
 
-
+print("Getting subreddits from multireddit.")
 subreddits = get_subreddits(reddit)
+
+print("Checking for new subreddits.")
+new_subreddits = find_new_subreddits(subreddits)
+
+if new_subreddits != []:
+    print("Found new subreddits.")
+    save_subreddits_to_db(new_subreddits)
+    print("Finished adding new subreddits to db.")
+else:
+    print("No new subreddits found.")
+
+print("Getting subcounts.")
 subcounts = get_subcounts(subreddits)
+
+print("Saving subcounts.")
 save_subcounts(subcounts)
+print("Saved subcounts.")
